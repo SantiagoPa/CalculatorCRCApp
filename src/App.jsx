@@ -1,10 +1,12 @@
+import { ScopedCssBaseline } from "@mui/material";
+import { ViewResult } from "./components";
 
 function App() {
-
   return (
-    <div>
-      hola
-    </div>
+    <>
+      <ScopedCssBaseline />
+      <ViewResult />
+    </>
   );
 }
 
