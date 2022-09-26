@@ -1,12 +1,14 @@
-import { ScopedCssBaseline } from "@mui/material";
-import { ViewResult } from "./components";
+import { AppProvider } from "./context";
+import { CalculatorPage } from "./crc-calculator/CalculatorPage";
+import { AppTheme } from "./theme/AppTheme";
 
 function App() {
   return (
-    <>
-      <ScopedCssBaseline />
-      <ViewResult />
-    </>
+    <AppProvider>
+      <AppTheme>
+        <CalculatorPage />
+      </AppTheme>
+    </AppProvider>
   );
 }
 

@@ -1,24 +1,88 @@
+import { useContext } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "../hooks";
+import { AppContext } from "../context";
+import {
+  calcCRC,
+  getPolynomialArray,
+  xOrOperation,
+} from "../helper/calculatorCRC";
 
 export const FormCRC = () => {
-  const { form, reset, handleInputChange } = useForm({ D: "", G: "", r: "" });
-  const { D, G, r } = form;
+  const { data, value, setValue } = useContext(AppContext);
+  const { form, reset, handleInputChange } = useForm({
+    D: "11100110011",
+    G: "100001",
+    MTX: '',
+  });
+  const { D, G, MTX } = form;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    const DPolynomial = getPolynomialArray(form.D);
+    const GPolynomial = getPolynomialArray(form.G);
+    const { trace, D, TX, result, CRC } = calcCRC(form.D, form.G);
+
+    setValue(
+      (prev) =>
+        (prev = {
+          ...value,
+          data: {
+            DPolynomial,
+            GPolynomial,
+            D,
+            CRC,
+            TX,
+            result,
+            trace,
+          },
+        })
+    );
+    // reset();
+  };
+
+  const handleValidation = () => {
+    const valueTX = MTX || data.TX; 
+    const { R, trace } = xOrOperation(valueTX, form.G);
+    const TXPolynomial = getPolynomialArray(valueTX);
+
+    setValue(
+      (prev) =>
+        (prev = {
+          ...value,
+          data: {
+            ...data,
+            validate: {
+              R,
+              trace,
+              TXPolynomial,
+            },
+          },
+        })
+    );
+  };
+
+  const handleReset = () => {
+    setValue(
+      (prev) =>
+        (prev = {
+          ...value,
+          data: null,
+          isOpenModal: false,
+        })
+    );
     reset();
   };
 
   return (
-    <Box component='div'>
+    <Box component="div">
       <Typography
-        variant="h4"
+        variant="body1"
         sx={{
           textAlign: "center",
           my: 4,
-          width: 700
+          color: "primary.main",
+          fontSize: { sm: "1.5rem", md: "1.8rem", lg: "2rem" },
         }}
       >
         Calculadora CRC
@@ -40,34 +104,49 @@ export const FormCRC = () => {
             <TextField
               id="outlined-basic"
               label="D"
+              name="D"
               value={D}
-              onChange={handleInputChange("D")}
+              onChange={(e) => handleInputChange(e)}
               placeholder="11100110011"
               variant="outlined"
-              sx={{
-                borderBlockColor: "#fff",
-              }}
             />
             <TextField
               id="outlined-basic"
               label="G"
+              name="G"
               value={G}
-              onChange={handleInputChange("G")}
+              onChange={(e) => handleInputChange(e)}
               placeholder="100001"
               variant="outlined"
             />
             <TextField
               id="outlined-basic"
-              label="r"
-              value={r}
-              onChange={handleInputChange("r")}
-              placeholder="00000"
+              label="Modificar TX"
+              disabled={!data}
+              name='MTX'
+              value={MTX}
+              onChange={(e)=>handleInputChange(e)}
+              placeholder="1110011001101"
               variant="outlined"
             />
           </Grid>
-          <Grid item>
-            <Button type="submit" variant="outlined">
-              Calcular CRC
+          <Grid container gap={2} justifyContent="center">
+            <Button type="submit" variant="contained">
+              Calcular
+            </Button>
+            <Button
+              onClick={handleValidation}
+              variant="outlined"
+              disabled={!data}
+            >
+              Validar
+            </Button>
+            <Button
+              onClick={handleReset}
+              variant="outlined"
+              disabled={!data?.validate}
+            >
+              Resetear
             </Button>
           </Grid>
         </Grid>

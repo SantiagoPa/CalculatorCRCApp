@@ -7,10 +7,10 @@ export const useForm = (initialState = {}) => {
         setForm(initialState);
     }
 
-    const handleInputChange = (prop) => (event) => {
+    const handleInputChange = (event) => {
         setForm({
             ...form,
-            [prop]: event.target.value
+            [event.target.name]: event.target.value
         });
     }
 
