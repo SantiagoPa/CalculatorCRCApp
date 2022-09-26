@@ -142,6 +142,11 @@ export const FormCRC = () => {
               placeholder="11100110011"
               variant="outlined"
             />
+            {errorD && (
+              <Typography variant="body2" color="error">
+                Debe establecer un D, ej: 11100110011{" "}
+              </Typography>
+            )}
             <TextField
               id="outlined-basic"
               label="G"
@@ -152,6 +157,11 @@ export const FormCRC = () => {
               placeholder="100001"
               variant="outlined"
             />
+            {errorD && (
+              <Typography variant="body2" color="error">
+                Debe establecer un G, ej: 100001{" "}
+              </Typography>
+            )}
             <TextField
               id="outlined-basic"
               label="Modificar TX"
