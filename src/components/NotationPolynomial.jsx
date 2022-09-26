@@ -29,7 +29,7 @@ export const NotationPolynomial = ({ polynomial }) => {
   return (
     <>
       {polynomial?.map((poly, idx) => (
-        <Typography component="span" key={`__${idx}__`}>
+        <Typography component="span" key={`__${idx}__`} sx={{ fontWeight: 800 }}>
           {definePoly(poly)}
           {defineMas(idx)}
         </Typography>

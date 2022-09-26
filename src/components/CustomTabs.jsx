@@ -65,10 +65,10 @@ export const CustomTabs = () => {
       <TabPanel value={value} index={0} >
         <Box component="div">
           <Box component="div">
-            Polinomio D: <NotationPolynomial polynomial={data?.DPolynomial} />
+            Polinomio D: {" "} <NotationPolynomial polynomial={data?.DPolynomial} />
           </Box>
           <Box component="div">
-            Polinomio G: <NotationPolynomial polynomial={data?.GPolynomial} />
+            Polinomio G: {" "} <NotationPolynomial polynomial={data?.GPolynomial} />
             <Typography sx={{ mt: 2, fontWeight: 800 }} >Division</Typography>
           </Box>
           <Typography sx={{ mt: 4 }} component="pre">

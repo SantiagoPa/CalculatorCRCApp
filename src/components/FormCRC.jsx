@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "../hooks";
 import { AppContext } from "../context";
@@ -9,19 +9,50 @@ import {
 } from "../helper/calculatorCRC";
 
 export const FormCRC = () => {
+  const [error, setError] = useState({ errorD: false, errorG: false });
+  const { errorD, errorG } = error;
+
   const { data, value, setValue } = useContext(AppContext);
-  const { form, reset, handleInputChange } = useForm({
-    D: "11100110011",
-    G: "100001",
-    MTX: '',
+  const { form, reset, handleInputChange, setForm } = useForm({
+    D: "",
+    G: "",
+    MTX: "",
   });
   const { D, G, MTX } = form;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (form.D === "" || form.G === "") {
+      setError(
+        (prev) =>
+          (prev = {
+            ...error,
+            errorD: true,
+            errorG: true,
+          })
+      );
+      return;
+    }
+
+    setError(
+      (prev) =>
+        (prev = {
+          ...error,
+          errorD: false,
+          errorG: false,
+        })
+    );
     const DPolynomial = getPolynomialArray(form.D);
     const GPolynomial = getPolynomialArray(form.G);
     const { trace, D, TX, result, CRC } = calcCRC(form.D, form.G);
+
+    setForm(
+      (prev) =>
+        (prev = {
+          ...form,
+          MTX: TX,
+        })
+    );
 
     setValue(
       (prev) =>
@@ -42,7 +73,7 @@ export const FormCRC = () => {
   };
 
   const handleValidation = () => {
-    const valueTX = MTX || data.TX; 
+    const valueTX = MTX || data.TX;
     const { R, trace } = xOrOperation(valueTX, form.G);
     const TXPolynomial = getPolynomialArray(valueTX);
 
@@ -105,6 +136,7 @@ export const FormCRC = () => {
               id="outlined-basic"
               label="D"
               name="D"
+              error={errorD}
               value={D}
               onChange={(e) => handleInputChange(e)}
               placeholder="11100110011"
@@ -114,6 +146,7 @@ export const FormCRC = () => {
               id="outlined-basic"
               label="G"
               name="G"
+              error={errorG}
               value={G}
               onChange={(e) => handleInputChange(e)}
               placeholder="100001"
@@ -123,9 +156,9 @@ export const FormCRC = () => {
               id="outlined-basic"
               label="Modificar TX"
               disabled={!data}
-              name='MTX'
+              name="MTX"
               value={MTX}
-              onChange={(e)=>handleInputChange(e)}
+              onChange={(e) => handleInputChange(e)}
               placeholder="1110011001101"
               variant="outlined"
             />
