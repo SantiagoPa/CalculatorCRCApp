@@ -8,11 +8,12 @@ import {
   xOrOperation,
 } from "../helper/calculatorCRC";
 
-export const FormCRC = () => {
+export const FormCRC = ( ) => {
+  const { data, value, setValue } = useContext(AppContext);
+
   const [error, setError] = useState({ errorD: false, errorG: false });
   const { errorD, errorG } = error;
 
-  const { data, value, setValue } = useContext(AppContext);
   const { form, reset, handleInputChange, setForm } = useForm({
     D: "",
     G: "",
@@ -64,6 +65,7 @@ export const FormCRC = () => {
             D,
             CRC,
             TX,
+            MTX,
             result,
             trace,
           },
@@ -83,6 +85,7 @@ export const FormCRC = () => {
           ...value,
           data: {
             ...data,
+            MTX: valueTX,
             validate: {
               R,
               trace,
@@ -104,6 +107,8 @@ export const FormCRC = () => {
     );
     reset();
   };
+
+
 
   return (
     <Box component="div">

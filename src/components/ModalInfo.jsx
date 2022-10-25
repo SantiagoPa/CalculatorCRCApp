@@ -48,7 +48,6 @@ export const ModalInfo = () => {
           component="div"
           justifyContent="center"
           alignItems="center"
-          direction="column"
           sx={{
             height: 250,
             overflowY: "auto",
@@ -60,7 +59,6 @@ export const ModalInfo = () => {
           gap={2}
         > 
           <CustomTabs />
-         
         </Grid>
         <Grid container justifyContent="space-between">
           <DataObjectIcon color="primary" />

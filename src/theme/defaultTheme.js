@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { red, purple, indigo } from "@mui/material/colors";
+import { red, purple, indigo, green } from "@mui/material/colors";
 
 export const defaultTheme = createTheme({
     palette: {
@@ -8,6 +8,9 @@ export const defaultTheme = createTheme({
         },
         secondary: {
             main: '#543884',
+        },
+        success: {
+            main: green[800]
         },
         background: {
             default: indigo[50],

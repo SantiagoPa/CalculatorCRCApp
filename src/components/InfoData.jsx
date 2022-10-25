@@ -14,12 +14,32 @@ export const InfoData = ({ data }) => {
       temp = [...R];
     }
 
-    if(temp) {
+    if (temp) {
       temp.includes("1")
         ? setError((prev) => (prev = true))
         : setError((prev) => (prev = false));
     }
 
+    console.log({
+      1: data.MTX.length,
+      "1.1": data.MTX,
+      "1.2": data.MTX === data.TX,
+      2: data.TX.length,
+      "2.1": data.TX,
+      "2.2": data.MTX.length == data.TX.length
+    });
+
+    if (!(data.MTX === data.TX && data.MTX.length == data.TX.length)) {
+      // console.log({
+      //   1: data.MTX.length,
+      //   "1.1": data.MTX,
+      //   2: data.TX.length,
+      //   "2.1": data.TX,
+      // });
+      setError((prev) => (prev = true));
+    }
+
+    // console.log(data);
   }, [data?.validate?.R]);
 
   return (
@@ -88,21 +108,25 @@ export const InfoData = ({ data }) => {
                 fontSize: { sm: "1.5rem", md: "2rem" },
                 fontWeight: 800,
               }}
-              color={error && "error"}
+              color={error ? "error" : "success.main"}
             >
               Validacion
             </Typography>
-            {error ? <CancelIcon color="error" /> : <VerifiedIcon />}
+            {error ? (
+              <CancelIcon color="error" />
+            ) : (
+              <VerifiedIcon color="success" />
+            )}
           </Grid>
           <Typography
             variant="body1"
-            color={error && "error"}
+            color={error ? "error" : "success.main"}
             sx={{ fontSize: { sm: "1.5rem", md: "2rem" } }}
           >
             R:{" "}
             <Typography
               component="span"
-              color={error && "error"}
+              color={error ? "error" : "success.main"}
               sx={{ fontWeight: 800, fontSize: { sm: "1.5rem", md: "2rem" } }}
             >
               {data.validate.R}
