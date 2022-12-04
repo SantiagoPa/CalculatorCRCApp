@@ -75,7 +75,7 @@ export const FormCRC = ( ) => {
   };
 
   const handleValidation = () => {
-    const valueTX = MTX || data.TX;
+    const valueTX = MTX || "";
     const { R, trace } = xOrOperation(valueTX, form.G);
     const TXPolynomial = getPolynomialArray(valueTX);
 
@@ -94,6 +94,9 @@ export const FormCRC = ( ) => {
           },
         })
     );
+
+    console.log('click - validation')
+
   };
 
   const handleReset = () => {
@@ -143,7 +146,7 @@ export const FormCRC = ( ) => {
               name="D"
               error={errorD}
               value={D}
-              onChange={(e) => handleInputChange(e)}
+              onChange={(e) => handleInputChange(e, true)}
               placeholder="11100110011"
               variant="outlined"
             />
@@ -158,7 +161,7 @@ export const FormCRC = ( ) => {
               name="G"
               error={errorG}
               value={G}
-              onChange={(e) => handleInputChange(e)}
+              onChange={(e) => handleInputChange(e, true)}
               placeholder="100001"
               variant="outlined"
             />
@@ -173,7 +176,7 @@ export const FormCRC = ( ) => {
               disabled={!data}
               name="MTX"
               value={MTX}
-              onChange={(e) => handleInputChange(e)}
+              onChange={(e) => handleInputChange(e, true)}
               placeholder="1110011001101"
               variant="outlined"
             />
@@ -183,7 +186,7 @@ export const FormCRC = ( ) => {
               Calcular
             </Button>
             <Button
-              onClick={handleValidation}
+              onClick={()=>handleValidation()}
               variant="outlined"
               disabled={!data}
             >

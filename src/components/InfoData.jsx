@@ -20,6 +20,12 @@ export const InfoData = ({ data }) => {
         : setError((prev) => (prev = false));
     }
 
+    console.log(data);
+
+    if (!(data.MTX === data.TX && data.MTX.length === data.TX.length)) {
+      setError((prev) => (prev = true));
+    }
+
     console.log({
       1: data.MTX.length,
       "1.1": data.MTX,
@@ -29,18 +35,9 @@ export const InfoData = ({ data }) => {
       "2.2": data.MTX.length == data.TX.length
     });
 
-    if (!(data.MTX === data.TX && data.MTX.length == data.TX.length)) {
-      // console.log({
-      //   1: data.MTX.length,
-      //   "1.1": data.MTX,
-      //   2: data.TX.length,
-      //   "2.1": data.TX,
-      // });
-      setError((prev) => (prev = true));
-    }
 
     // console.log(data);
-  }, [data?.validate?.R]);
+  }, [data?.validate?.R, data?.validate?.TXPolynomial]);
 
   return (
     <>

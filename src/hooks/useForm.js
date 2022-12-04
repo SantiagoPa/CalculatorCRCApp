@@ -7,10 +7,10 @@ export const useForm = (initialState = {}) => {
         setForm(initialState);
     }
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event, regex) => {
         setForm({
             ...form,
-            [event.target.name]: event.target.value
+            [event.target.name]: regex ? event.target.value.replace(/[^0-1]/g, "") : event.target.value,
         });
     }
 

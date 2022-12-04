@@ -111,20 +111,20 @@ export const getPolynomialArray = (binaryNumber) => {
 // let data = "1011001100101";
 // let G = "10001";
 
-let data = "1000000001";
-let G = "1111";
-getPolynomial(data);
-getPolynomialArray(data);
-getPolynomial(G);
-getPolynomialArray(G);
-const { trace, D, TX, result, CRC } = calcCRC(data, G);
-console.log(trace);
-console.log("🚀 ~ file: t.js ~ line 88 ~ CRC   ", CRC);
-console.log("🚀 ~ file: t.js ~ line 88 ~ result", result);
-console.log("🚀 ~ file: t.js ~ line 88 ~ D     ", D);
-console.log("🚀 ~ file: t.js ~ line 88 ~ TX    ", TX);
+// let data = "1000000001";
+// let G = "1111";
+// getPolynomial(data);
+// getPolynomialArray(data);
+// getPolynomial(G);
+// getPolynomialArray(G);
+// const { trace, D, TX, result, CRC } = calcCRC(data, G);
+// console.log(trace);
+// console.log("🚀 ~ file: t.js ~ line 88 ~ CRC   ", CRC);
+// console.log("🚀 ~ file: t.js ~ line 88 ~ result", result);
+// console.log("🚀 ~ file: t.js ~ line 88 ~ D     ", D);
+// console.log("🚀 ~ file: t.js ~ line 88 ~ TX    ", TX);
 
-const {R, trace: trace2 } = xOrOperation(TX,G);
-console.log("🚀 ~ file: calculatorCRC.js ~ line 127 ~ R", R);
-console.log("🚀 ~ file: calculatorCRC.js ~ line 127 ~ trace2", trace2);
+// const {R, trace: trace2 } = xOrOperation(TX,G);
+// console.log("🚀 ~ file: calculatorCRC.js ~ line 127 ~ R", R);
+// console.log("🚀 ~ file: calculatorCRC.js ~ line 127 ~ trace2", trace2);
 
